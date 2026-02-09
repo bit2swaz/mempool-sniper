@@ -16,8 +16,18 @@ mempool sniper is a rust-based transaction monitoring tool that connects to ethe
 
 ## architecture
 
-```
-websocket → ingestor → channel (500k capacity) → consumer pool (50 workers) → discord
+```mermaid
+graph LR
+    WS[WSS Stream] -->|Tx Hashes| I(Ingestor)
+    I -->|Ring Buffer| C{Channel}
+    C -->|Pop| W[Worker Pool]
+    
+    subgraph "Parallel Workers (x50)"
+        W -->|RPC Fetch| D[Decoder]
+        D -->|Format| P[Payload]
+    end
+    
+    P -->|Rate Limited| H[Discord Webhook]
 ```
 
 **components:**
