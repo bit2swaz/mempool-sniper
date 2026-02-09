@@ -297,7 +297,6 @@ if you accidentally expose credentials:
 ## support
 
 - issues: [github issues](https://github.com/bit2swaz/mempool-sniper/issues)
-- documentation: see [prd.md](PRD.md) for detailed technical specification
 
 ## disclaimer
 
